@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import useSWR from "swr";
 import Navbar from "@/Components/Navbar/Navbar";
+import Footer from "@/Components/Footer/Footer";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -12,7 +13,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Navbar />
-      <Component {...pageProps} />
+      <Component {...pageProps} />\
+      <Footer />
     </>
   );
 }
