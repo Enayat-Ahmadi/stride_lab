@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
-import useSWR from "swr";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
