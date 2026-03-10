@@ -1,4 +1,6 @@
 import "@/styles/globals.css";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -8,5 +10,11 @@ export default function App({ Component, pageProps }) {
   if (isLoading) return <h3>isLoading...</h3>;
   if (error) return <h3>error</h3>;
 
-  return <Component {...pageProps} products={products} error={error}/>;
+  return (
+    <>
+      <Navbar />
+      <Component {...pageProps} products={products} error={error} />
+      <Footer />
+    </>
+  );
 }
