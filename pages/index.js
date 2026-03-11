@@ -19,7 +19,6 @@ export default function Home({ products, error, isLoading }) {
     <div
       className={`${geistSans.className} ${geistMono.className}min-h-screen w-full flex flex-col items-center justify-center font-sans p-10 sm:px-2`}
     >
-      <h1 className="text-4xl font-semibold">Sneaker Shop</h1>
       <main className="min-h-screen max-w-6xl grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
         {products.map((product) => {
           return <Card key={product._id} product={product} />;
