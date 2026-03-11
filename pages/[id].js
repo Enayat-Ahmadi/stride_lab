@@ -11,7 +11,7 @@ const Details = () => {
     data: product,
     error,
     isLoading,
-  } = useSWR(id ? `/api/${id}` : null, fetcher);
+  } = useSWR(id ? `/api/products/${id}` : null, fetcher);
   if (error) return <p>error</p>;
   if (isLoading) return <p>isLoading...</p>;
   console.log(product);
