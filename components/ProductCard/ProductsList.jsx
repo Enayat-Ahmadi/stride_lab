@@ -1,4 +1,5 @@
 import ProductCard from "./Card";
+import Link from "next/link";
 
 const ProductsList = ({ products }) => {
   return (
@@ -6,7 +7,9 @@ const ProductsList = ({ products }) => {
       {products?.map((product) => {
         return (
           <li key={product._id}>
-            <ProductCard product={product} />
+            <Link href={product._id}>
+              <ProductCard product={product} />
+            </Link>
           </li>
         );
       })}
