@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useLocalStorage } from "@uidotdev/usehooks";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,6 +12,14 @@ import {
 } from "@/components/ui/card";
 
 export default function ProductCard({ product }) {
+  const [wishlist, setWishlist] = useLocalStorage("wishlist", []);
+  function toggleWishlist(productId) {
+    if (wishlist.includes(productId)) {
+      setWishlist(wishlist.filter((id) => id !== productId));
+    } else {
+      setWishlist([...wishlist, productId]);
+    }
+  }
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <Image
@@ -28,10 +37,21 @@ export default function ProductCard({ product }) {
         <CardDescription>{product.price} $</CardDescription>
       </CardHeader>
       <CardFooter className="flex flex-col gap-2">
-        <Button className="w-full" size="lg">
+        <Button
+          className="w-full"
+          size="lg"
+          onClick={(e) => {
+            e.preventDefault();
+            toggleWishlist(product._id);
+          }}
+        >
           Add to Wishlist
         </Button>
-        <Button className="w-full" size="lg">
+        <Button
+          className="w-full"
+          size="lg"
+          onClick={(e) => e.preventDefault()}
+        >
           Add to Cart
         </Button>
       </CardFooter>
