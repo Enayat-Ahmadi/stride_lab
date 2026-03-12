@@ -7,8 +7,10 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import useWishlist from "@/hooks/useWishlist";
 
-const ProductDetails = ({ product }) => {
+export function ProductDetails({ product }) {
+  const { toggleWishlist, isWishlisted } = useWishlist();
   return (
     <Card className="mx-auto max-w-5xl overflow-hidden">
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
@@ -43,12 +45,22 @@ const ProductDetails = ({ product }) => {
             <Button size="lg" className="flex-1">
               Add to Cart
             </Button>
-            <Button variant="outline">Wishlist</Button>
+            <Button
+              variant="outline"
+              onClick={(e) => {
+                e.preventDefault();
+                toggleWishlist(product._id);
+              }}
+            >
+              {isWishlisted(product._id)
+                ? "remove from wishlist"
+                : "Add to Wishlist"}
+            </Button>
           </div>
         </div>
       </CardContent>
     </Card>
   );
-};
+}
 
 export default ProductDetails;
