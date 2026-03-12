@@ -4,7 +4,7 @@ import ProductDetails from "@/components/ProductCard/ProductDetails";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const Details = () => {
+export default function Details() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -21,5 +21,4 @@ const Details = () => {
       <ProductDetails product={product} />
     </div>
   );
-};
-export default Details;
+}
