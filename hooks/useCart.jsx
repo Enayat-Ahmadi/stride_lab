@@ -1,32 +1,29 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-
 export default function useCart() {
   const [productCart, setProductCart] = useLocalStorage("cart", []);
 
   function addToCart(productId) {
-    const isExist = productCart.find((item) => item.productId === productId);
+    const isExist = productCart.find((item) => item.id === productId);
     if (isExist) {
       setProductCart(
         productCart.map((item) =>
-          item.productId === productId
+          item.id === productId
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         ),
       );
     } else {
-      setProductCart([...productCart, { productId, quantity: 1 }]);
+      setProductCart([...productCart, { id: productId, quantity: 1 }]);
     }
   }
   function removeFromCart(productId) {
-    setProductCart(productCart.filter((item) => item.productId !== productId));
+    setProductCart(productCart.filter((item) => item.id !== productId));
   }
   function increaseQuantity(productId) {
     setProductCart(
       productCart.map((item) =>
-        item.productId === productId
-          ? { ...item, quantity: quantity + 1 }
-          : item,
+        item.id === productId ? { ...item, quantity: quantity + 1 } : item,
       ),
     );
   }
@@ -34,9 +31,7 @@ export default function useCart() {
     setProductCart(
       productCart
         .map((item) =>
-          item.productId === productId
-            ? { ...item, quantity: quantity - 1 }
-            : item,
+          item.id === productId ? { ...item, quantity: quantity - 1 } : item,
         )
         .filter((item) => item.quantity > 0),
     );
