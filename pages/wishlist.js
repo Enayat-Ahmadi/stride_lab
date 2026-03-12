@@ -1,16 +1,14 @@
-import { useLocalStorage } from "@uidotdev/usehooks";
 import ProductsList from "@/components/ProductCard/ProductsList";
+import useWishlist from "@/hooks/useWishlist";
 
-const WishList = ({ products }) => {
-  const [WishList] = useLocalStorage("wishlist", []);
+export default function WishList({ products }) {
+  const { wishlist } = useWishlist();
   const wishlistProducts =
-    products?.filter((product) => WishList.includes(product._id)) || [];
-  console.log(wishlistProducts);
+    products?.filter((product) => wishlist.includes(product._id)) || [];
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center">
       <ProductsList products={wishlistProducts} />
     </div>
   );
-};
-
-export default WishList;
+}
