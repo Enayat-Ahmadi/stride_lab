@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import useWishlist from "@/hooks/useWishlist";
 import {
   Card,
   CardAction,
@@ -12,15 +13,8 @@ import {
 } from "@/components/ui/card";
 
 export default function ProductCard({ product }) {
-  const [wishlist, setWishlist] = useLocalStorage("wishlist", []);
-  function toggleWishlist(productId) {
-    if (wishlist.includes(productId)) {
-      setWishlist(wishlist.filter((id) => id !== productId));
-    } else {
-      setWishlist([...wishlist, productId]);
-    }
-  }
-  const isWishlsited = wishlist.includes(product._id);
+  const {setWishlist,toggleWishlist, isWishlisted } = useWishlist();
+
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
       <Image
@@ -46,7 +40,9 @@ export default function ProductCard({ product }) {
             toggleWishlist(product._id);
           }}
         >
-          {isWishlsited ? "remove from wishlist" : "Add to Wishlist"}
+          {isWishlisted(product._id)
+            ? "remove from wishlist"
+            : "Add to Wishlist"}
         </Button>
         <Button
           className="w-full"
