@@ -21,15 +21,15 @@ export default function useCart() {
     setProductCart(productCart.filter((item) => item.id !== productId));
   }
   function increaseQuantity(productId) {
-    setProductCart(
-      productCart.map((item) =>
+    setProductCart((prev) =>
+      prev.map((item) =>
         item.id === productId ? { ...item, quantity: item.quantity + 1 } : item,
       ),
     );
   }
   function decreaseQuantity(productId) {
-    setProductCart(
-      productCart
+    setProductCart((prev) =>
+      prev
         .map((item) =>
           item.id === productId
             ? { ...item, quantity: item.quantity - 1 }
