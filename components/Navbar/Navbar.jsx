@@ -11,7 +11,7 @@ const navItems = [
 export default function Navbar() {
   const { wishlist } = useWishlist();
   const { productCart } = useCart();
-  console.log(productCart);
+
   const router = useRouter();
   return (
     <nav className="flex items-center justify-between px-6 py-4 border-b">
