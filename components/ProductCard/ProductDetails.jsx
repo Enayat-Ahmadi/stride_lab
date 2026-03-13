@@ -8,9 +8,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useWishlist from "@/hooks/useWishlist";
+import useCart from "@/hooks/useCart";
 
 export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
+  const { addToCart } = useCart();
   return (
     <Card className="mx-auto max-w-5xl overflow-hidden">
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
@@ -42,7 +44,11 @@ export default function ProductDetails({ product }) {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button size="lg" className="flex-1">
+            <Button
+              size="lg"
+              className="flex-1"
+              onClick={() => addToCart(product._id)}
+            >
               Add to Cart
             </Button>
             <Button
@@ -62,4 +68,3 @@ export default function ProductDetails({ product }) {
     </Card>
   );
 }
-
