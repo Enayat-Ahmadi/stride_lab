@@ -87,10 +87,12 @@ export default function Cart({ products }) {
             </div>
           </div>
 
-          <button className="mt-6 w-full rounded-full bg-black py-4 text-lg font-semibold text-white transition hover:bg-neutral-800">
+          <Button
+            size="lg"
+            className="mt-6 h-15 rounded-full bg-black text-lg font-semibold transition hover:bg-neutral-800"
+          >
             Checkout
-          </button>
-
+          </Button>
           <p className="mt-4 text-xs text-muted-foreground">
             Shipping, discounts and taxes calculated at checkout.
           </p>
