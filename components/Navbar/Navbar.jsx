@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 
+
 const navItems = [
   { label: "Home", href: "/" },
   //   { label: "Products", href: "/products" },
@@ -11,7 +12,10 @@ const navItems = [
 export default function Navbar() {
   const { wishlist } = useWishlist();
   const { productCart } = useCart();
-
+  const totalItems = productCart.reduce(
+    (sum, Product) => sum + Product.quantity,
+    0,
+  );
   const router = useRouter();
   return (
     <nav className="flex items-center justify-between px-6 py-4 border-b">
@@ -51,7 +55,7 @@ export default function Navbar() {
           <Link href="/cart">
             <ShoppingCart className="w-9 h-9" />
             <span className="absolute bg-amber-500 rounded-full h-5 w-5 text-center text-white top-4 right-0">
-              {productCart.length}
+              {totalItems}
             </span>
           </Link>
         </div>
