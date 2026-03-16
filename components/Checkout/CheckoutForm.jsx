@@ -3,6 +3,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Card, CardTitle, CardHeader, CardContent } from "../ui/card";
 import { Field } from "../ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 export default function CheckoutForm({ onSubmit }) {
   return (
     <div className="mx-auto min-h-screen grid max-w-7xl gap-6 lg:grid-cols-3">
@@ -80,6 +82,27 @@ export default function CheckoutForm({ onSubmit }) {
                 />
               </Field>
             </div>
+          </CardContent>
+        </Card>
+        <Card className="rounded-2xl">
+          <CardHeader>
+            <CardTitle>Payment Method</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <RadioGroup className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-3 rounded-xl border p-4">
+                <RadioGroupItem value="card" id="card" />
+                <Label htmlFor="card" className="cursor-pointer">
+                  Credit / Debit Card
+                </Label>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl border p-4">
+                <RadioGroupItem value="paypal" id="paypal" />
+                <Label htmlFor="paypal" className="cursor-pointer">
+                  PayPal
+                </Label>
+              </div>
+            </RadioGroup>
           </CardContent>
         </Card>
         <Button type="submit" size="lg" className="w-ful rounded-xl">
