@@ -9,6 +9,7 @@ export default function CheckoutForm({ onSubmit }) {
   return (
     <div className="mx-auto min-h-screen grid max-w-7xl gap-6 lg:grid-cols-3">
       <form onSubmit={onSubmit} className="space-y-6 lg:col-span-2">
+        {/* Customer Information Card */}
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Customer Information</CardTitle>
@@ -45,6 +46,7 @@ export default function CheckoutForm({ onSubmit }) {
             </Field>
           </CardContent>
         </Card>
+        {/* Shipping Address Card */}
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Shiping Address</CardTitle>
@@ -84,6 +86,7 @@ export default function CheckoutForm({ onSubmit }) {
             </div>
           </CardContent>
         </Card>
+        {/* Paymetn Method Card */}
         <Card className="rounded-2xl">
           <CardHeader>
             <CardTitle>Payment Method</CardTitle>
