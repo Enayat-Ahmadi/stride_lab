@@ -48,7 +48,7 @@ export default function useCart() {
     setProductCart([]);
   }
   return {
-    productCart,
+    productCart: productCart || [],
     addToCart,
     removeFromCart,
     increaseQuantity,

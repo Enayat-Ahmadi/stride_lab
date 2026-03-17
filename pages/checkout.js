@@ -11,18 +11,17 @@ export default function Checkout({ products }) {
   const [success, setSuccess] = useState(false);
   const router = useRouter();
   const { productCart, clearCart } = useCart();
-  const cartProducts =
-    productCart
-      ?.map((item) => {
-        const product = products?.find((product) => product._id === item.id);
-        if (!product) return null;
+  const cartProducts = productCart
+    ?.map((item) => {
+      const product = products?.find((product) => product._id === item.id);
+      if (!product) return null;
 
-        return {
-          ...product,
-          quantity: item.quantity,
-        };
-      })
-      .filter(Boolean) || [];
+      return {
+        ...product,
+        quantity: item.quantity,
+      };
+    })
+    .filter(Boolean);
 
   function handleOrder(e) {
     e.preventDefault();
@@ -46,45 +45,37 @@ export default function Checkout({ products }) {
     }, 1500);
   }
   return (
-    <>
-      {/* {success && (
-        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
-          <CheckCircle2 className="h-5 w-5" />
-          <span>Order placed successfully</span>
-        </div>
-      )} */}
+    <div className="px-4 py-8 md:px-8 grid mx-auto max-w-7xl gap-6 lg:grid-cols-3">
+      <div className="lg:order-2 h-fit lg:sticky lg:top-24">
+        <OrderSummary cartProducts={cartProducts} />
+      </div>
       <form
         id="checkout-form"
         onSubmit={handleOrder}
-        className="min-h-screen bg-muted/30 px-4 py-8 md:px-8 grid max-w-7xl gap-6 lg:grid-cols-3"
+        className="flex flex-col gap-4 lg:col-span-2"
       >
-        <div className="grid lg:col-span-2 ">
-          <CheckoutForm />
-        </div>
-        <div className="h-fit lg:sticky lg:top-24">
-          <OrderSummary cartProducts={cartProducts} />
-          <Button
-            type="submit"
-            className="w-full rounded-xl"
-            size="lg"
-            disabled={loading || success || cartProducts.length === 0}
-          >
-            {loading ? (
-              <span className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Processing...
-              </span>
-            ) : success ? (
-              <span className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4" />
-                Order Placed
-              </span>
-            ) : (
-              "Place Order"
-            )}
-          </Button>
-        </div>
+        <CheckoutForm />
+        <Button
+          type="submit"
+          className="w-full rounded-xl"
+          size="lg"
+          disabled={loading || success || cartProducts.length === 0}
+        >
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Processing...
+            </span>
+          ) : success ? (
+            <span className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4" />
+              Order Placed
+            </span>
+          ) : (
+            "Place Order"
+          )}
+        </Button>
       </form>
-    </>
+    </div>
   );
 }
