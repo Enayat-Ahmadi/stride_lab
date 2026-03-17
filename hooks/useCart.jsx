@@ -1,7 +1,9 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
+import { useState } from "react";
 
 export default function useCart() {
   const [productCart, setProductCart] = useLocalStorage("cart", []);
+  const [success, setSuccess] = useState(false);
 
   function addToCart(productId) {
     const isExist = productCart.find((item) => item.id === productId);
@@ -16,6 +18,10 @@ export default function useCart() {
     } else {
       setProductCart([...productCart, { id: productId, quantity: 1 }]);
     }
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 1500);
   }
   function removeFromCart(productId) {
     setProductCart(productCart.filter((item) => item.id !== productId));
@@ -48,5 +54,6 @@ export default function useCart() {
     increaseQuantity,
     decreaseQuantity,
     clearCart,
+    success,
   };
 }

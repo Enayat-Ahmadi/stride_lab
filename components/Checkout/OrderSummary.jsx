@@ -44,7 +44,7 @@ export default function OrderSummary({ cartProducts }) {
           </div>
 
           <Separator />
-          
+
           <div className="space-y-2 text-sm">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground">Subtotal</span>
@@ -59,14 +59,14 @@ export default function OrderSummary({ cartProducts }) {
             <span>€ {subtotal.toFixed(2)}</span>
           </div>
 
-          <Button
+          {/* <Button
             type="submit"
             className="w-full rounded-xl"
             size="lg"
             disabled={cartProducts.length === 0}
           >
             Place Order
-          </Button>
+          </Button> */}
         </CardContent>
       </Card>
     </div>

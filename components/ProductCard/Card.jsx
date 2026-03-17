@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
+
 import {
   Card,
   CardAction,
@@ -14,10 +15,15 @@ import {
 
 export default function ProductCard({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, success } = useCart();
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
+      {success && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
+          <span>Product added to shopping cart!</span>
+        </div>
+      )}
       <Image
         src={product.images?.[0]}
         alt={product.name}

@@ -2,8 +2,13 @@ import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import OrderSummary from "@/components/Checkout/OrderSummary";
 import useCart from "@/hooks/useCart";
 import { useRouter } from "next/router";
+import { Loader2, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Checkout({ products }) {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
   const { productCart, clearCart } = useCart();
   const cartProducts =
@@ -21,27 +26,65 @@ export default function Checkout({ products }) {
 
   function handleOrder(e) {
     e.preventDefault();
+    if (loading || cartProducts.length === 0) return;
+
+    setLoading(true);
     const formData = new FormData(e.target);
     const customerInfo = Object.fromEntries(formData);
     const order = {
       customer: customerInfo,
       products: cartProducts,
     };
-    clearCart();
-    router.push("/order-success");
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+      clearCart?.();
+
+      setTimeout(() => {
+        router.push("/order-success");
+      }, 1500);
+    }, 1500);
   }
   return (
-    <form
-      id="checkout-form"
-      onSubmit={handleOrder}
-      className="min-h-screen bg-muted/30 px-4 py-8 md:px-8 grid max-w-7xl gap-6 lg:grid-cols-3"
-    >
-      <div className="grid lg:col-span-2 ">
-        <CheckoutForm />
-      </div>
-      <div className="h-fit lg:sticky lg:top-24">
-        <OrderSummary cartProducts={cartProducts} />
-      </div>
-    </form>
+    <>
+      {/* {success && (
+        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
+          <CheckCircle2 className="h-5 w-5" />
+          <span>Order placed successfully</span>
+        </div>
+      )} */}
+      <form
+        id="checkout-form"
+        onSubmit={handleOrder}
+        className="min-h-screen bg-muted/30 px-4 py-8 md:px-8 grid max-w-7xl gap-6 lg:grid-cols-3"
+      >
+        <div className="grid lg:col-span-2 ">
+          <CheckoutForm />
+        </div>
+        <div className="h-fit lg:sticky lg:top-24">
+          <OrderSummary cartProducts={cartProducts} />
+          <Button
+            type="submit"
+            className="w-full rounded-xl"
+            size="lg"
+            disabled={loading || success || cartProducts.length === 0}
+          >
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Processing...
+              </span>
+            ) : success ? (
+              <span className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4" />
+                Order Placed
+              </span>
+            ) : (
+              "Place Order"
+            )}
+          </Button>
+        </div>
+      </form>
+    </>
   );
 }
