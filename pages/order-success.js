@@ -18,7 +18,7 @@ export default function OrderSuccess() {
       <Card className="w-full max-w-xl rounded-2xl text-center">
         <CardHeader>
           <CardTitle className="text-2xl">
-            Order placed successfully 🎉
+            Order placed successfully
           </CardTitle>
         </CardHeader>
 
