@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const orderSchema = new schema(
+const orderSchema = new Schema(
   {
     customer: {
       fullname: { type: String, required: true },
