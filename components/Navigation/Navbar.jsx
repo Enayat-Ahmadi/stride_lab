@@ -6,7 +6,9 @@ import useCart from "@/hooks/useCart";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Products", href: "/products" },
+  { label: "Men", href: "/products?gender=men" },
+  { label: "Women", href: "/products?gender=women" },
+  { label: "Kids", href: "/products?gender=kids" },
 ];
 export default function Navbar() {
   const { wishlist } = useWishlist();
