@@ -5,6 +5,7 @@ import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -17,6 +18,8 @@ export default function Navbar() {
   const { pathname, query } = router;
   const { wishlist } = useWishlist();
   const { productCart } = useCart();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const totalItems = productCart.reduce(
     (sum, Product) => sum + Product.quantity,
     0,
@@ -33,15 +36,19 @@ export default function Navbar() {
     <>
       <nav className="border-b">
         <div className="flex items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-4">
-            <Button type="button" className="md:hidden">
+          <div className="flex items-center">
+            <Button
+              variant="ghost"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(true)}
+            >
               <Menu className="w-6 h-6" />
             </Button>
             <Link href="/" className="text-xl font-bold">
               Sneakify
             </Link>
           </div>
-          <div className="flex gap-6">
+          <div className="hidden gap-6 md:flex">
             {navItems.map((item) => {
               const active = isActive(item);
 
@@ -88,48 +95,54 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <div className="fixed inset-0 z-50">
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute left-0 top-0 h-full w-[80%] max-w-sm bg-white p-6 shadow-xl">
-          <div className="mb-8 flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold">
-              Sneakfiy
-            </Link>
-            <Button type="button" variant="ghost">
-              <X className="h-6 w-6" />
-            </Button>
-          </div>
-          <div className="flex flex-col gap-5">
-            {navItems.map((item) => {
-              const active = isActive(item);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "text-base font-medium transition",
-                    active ? "text-black" : "text-gray-500 hover:text-black",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <Link
-              href="/wishlist"
-              className="text-base font-medium text-gray-500 hover:text-black"
-            >
-              Wishlist ({wishlist.length})
-            </Link>
-            <Link
-              href="/cart"
-              className="text-base font-medium text-gray-500 hover:text-black"
-            >
-              Cart ({totalItems})
-            </Link>
+      {/* Mobile  Menu*/}
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div className="absolute left-0 top-0 h-full w-[80%] max-w-sm bg-white p-6 shadow-xl">
+            <div className="mb-8 flex items-center justify-between">
+              <Link
+                href="/"
+                className="text-xl font-bold"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Sneakfiy
+              </Link>
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <X className="h-6 w-6" />
+              </Button>
+            </div>
+            <div className="flex flex-col gap-5">
+              {navItems.map((item) => {
+                const active = isActive(item);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "relative text-sm font-medium transition",
+                      active
+                        ? "text-destructive font-semibold"
+                        : "text-gray-500 hover:text-black",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
