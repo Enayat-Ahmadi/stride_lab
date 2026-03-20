@@ -45,11 +45,17 @@ export default function Navbar() {
               className={cn(
                 "relative text-sm font-medium transition",
                 active
-                  ? "text-amber-500 font-semibold"
+                  ? "text-destructive font-semibold"
                   : "text-gray-500 hover:text-black",
               )}
             >
               {item.label}
+              <span
+                className={cn(
+                  "absolute w-full left-0 bottom-0 h-0.5 bg-destructive transition",
+                  active ? "opacity-100" : "opacity-0",
+                )}
+              />
             </Link>
           );
         })}
