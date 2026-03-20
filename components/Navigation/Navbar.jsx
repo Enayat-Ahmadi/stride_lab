@@ -3,20 +3,31 @@ import { ShoppingCart, Heart } from "lucide-react";
 import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
-
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { label: "Home", href: "/" },
-  //   { label: "Products", href: "/products" },
+  { label: "Men", href: "/products?gender=men", gender: "men" },
+  { label: "Women", href: "/products?gender=women", gender: "women" },
+  { label: "Kids", href: "/products?gender=kids", gender: "kids" },
 ];
 export default function Navbar() {
+  const router = useRouter();
+  const { pathname, query } = router;
   const { wishlist } = useWishlist();
   const { productCart } = useCart();
   const totalItems = productCart.reduce(
     (sum, Product) => sum + Product.quantity,
     0,
   );
-  const router = useRouter();
+
+  function isActive(item) {
+    if (item.href === "/") {
+      return pathname === "/";
+    }
+    return pathname === "/products" && query.gender === item.gender;
+  }
+
   return (
     <nav className="flex items-center justify-between px-6 py-4 border-b">
       <Link href="/" className="text-xl font-bold">
@@ -25,18 +36,26 @@ export default function Navbar() {
 
       <div className="flex gap-6">
         {navItems.map((item) => {
-          const isActive = router.pathname === item.href;
+          const active = isActive(item);
+
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`transition ${
-                isActive
-                  ? "text-black font-semibold border-b-2 border-black"
-                  : "text-gray-500 hover:text-black"
-              }`}
+              className={cn(
+                "relative text-sm font-medium transition",
+                active
+                  ? "text-destructive font-semibold"
+                  : "text-gray-500 hover:text-black",
+              )}
             >
               {item.label}
+              <span
+                className={cn(
+                  "absolute w-full left-0 bottom-0 h-0.5 bg-destructive transition",
+                  active ? "opacity-100" : "opacity-0",
+                )}
+              />
             </Link>
           );
         })}
