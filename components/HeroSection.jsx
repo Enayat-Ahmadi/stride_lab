@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden rounded-2xl">
       <div className="absolute inset-0">
         <Image
           src="/hero2.jpg"

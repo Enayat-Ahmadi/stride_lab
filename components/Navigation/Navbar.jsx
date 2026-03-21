@@ -39,7 +39,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Button
               variant="ghost"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileMenuOpen(true)}
             >
               <Menu className="w-6 h-6" />
@@ -48,7 +48,7 @@ export default function Navbar() {
               SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
           </div>
-          <div className="hidden gap-6 md:flex">
+          <div className="hidden gap-6 lg:flex">
             {navItems.map((item) => {
               const active = isActive(item);
 
@@ -98,7 +98,7 @@ export default function Navbar() {
       {/* Mobile  Menu*/}
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileMenuOpen(false)}
