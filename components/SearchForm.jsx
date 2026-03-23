@@ -36,10 +36,15 @@ export default function SearchOverly({ products }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button type="submit" variant="fhost">
-          search
-        </Button>
       </form>
+      <div>
+        {query &&
+          result.slice(0, 5).map((product) => (
+            <button key={product._id} type="button">
+              <p>{product.name}</p>
+            </button>
+          ))}
+      </div>
     </div>
   );
 }
