@@ -10,7 +10,7 @@ export default function Products({ products }) {
     if (!gender) return products;
     if (gender === "kids") {
       return products.filter((product) =>
-        product.sizes.some((size) => size < 38),
+        product.sizes.some((size) => size <= 38),
       );
     }
 
