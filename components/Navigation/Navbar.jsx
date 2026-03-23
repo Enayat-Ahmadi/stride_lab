@@ -73,7 +73,7 @@ export default function Navbar({ products }) {
           <div className="flex gap-6">
             <Search onClick={() => setOpen(true)} />
             {open && (
-              <div className="fixed inset-0 z-50 bg-white p-6">
+              <div className="fixed inset-0 z-100 bg-white p-6">
                 <SearchOverly
                   products={products}
                   onClose={() => setOpen(false)}
@@ -98,7 +98,7 @@ export default function Navbar({ products }) {
             </div>
             <Button
               variant="ghost"
-              className="lg:hidden z-100 w-6 h-7"
+              className="lg:hidden z-60 w-6 h-7"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
             >
               {mobileMenuOpen ? (
@@ -113,7 +113,7 @@ export default function Navbar({ products }) {
       {/* Mobile  Menu*/}
 
       {mobileMenuOpen && (
-        <div className="fixed w-full right-0 inset-0 z-50 lg:hidden">
+        <div className="fixed w-full right-0 inset-0 z-30 lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileMenuOpen(false)}
