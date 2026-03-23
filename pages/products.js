@@ -8,6 +8,11 @@ export default function Products({ products }) {
   const { gender } = router.query;
   const filteredProducts = useMemo(() => {
     if (!gender) return products;
+    if (gender === "kids") {
+      return products.filter((product) =>
+        product.sizes.some((size) => size < 38),
+      );
+    }
 
     return products.filter((product) => product.gender === gender);
   }, [products, gender]);
