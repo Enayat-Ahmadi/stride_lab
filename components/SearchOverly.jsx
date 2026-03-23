@@ -1,7 +1,7 @@
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 export default function SearchOverly({ products, onClose }) {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function SearchOverly({ products, onClose }) {
     e.preventDefault();
     if (!query) return;
 
-    onClose()
+    onClose();
     router.push({
       pathname: "/products",
       query: {
@@ -32,26 +32,37 @@ export default function SearchOverly({ products, onClose }) {
     onClose();
     router.push(`/${productId}`);
   }
+  function clearSearch() {
+    setSearch("");
+  }
   return (
-    <div className="mx-auto max-w-2xl">
-      <form onSubmit={handleSerach} className="relative flex">
-        <Input
-          type="text"
-          name="search"
-          id="search"
-          placeholder="search product..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full h-10 rounded-full border px-4 py-3 text-lg outline-none"
-        />
+    <div className="mx-auto max-w-2xl ">
+      <div className="relative flex justify-between gap-1 w-full">
+        <form onSubmit={handleSerach} className="relative flex w-full">
+          <Input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="search product..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="min-w-75 h-12 rounded-full border px-4 py-3 text-lg outline-none pl-9"
+          />
+          <button
+            type="submit"
+            variant="ghost"
+            className="absolute left-2 top-3"
+          >
+            <Search />
+          </button>
+        </form>
         <button
-          type="submit"
-          variant="ghost"
-          className="absolute right-2 top-2"
+          onClick={search ? clearSearch : onClose}
+          className="absolute right-2 top-3"
         >
-          <Search />
+          <X />
         </button>
-      </form>
+      </div>
       <div className="mt-4 space-y-2">
         {query &&
           result.slice(0, 5).map((product) => (
