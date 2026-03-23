@@ -36,16 +36,9 @@ export default function Navbar({ products }) {
 
   return (
     <>
-      <nav className="border-b">
+      <nav className="border-b ">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center">
-            <Button
-              variant="ghost"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <Menu className="w-6 h-6" />
-            </Button>
             <Link href="/" className="text-xl font-bold">
               SNEAK<span className="italic text-lime-400">ify</span>
             </Link>
@@ -103,35 +96,30 @@ export default function Navbar({ products }) {
                 </span>
               </Link>
             </div>
+            <Button
+              variant="ghost"
+              className="lg:hidden z-100 w-6 h-7"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </Button>
           </div>
         </div>
       </nav>
       {/* Mobile  Menu*/}
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed w-full right-0 inset-0 z-50 lg:hidden">
           <div
             className="absolute inset-0 bg-black/50"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="absolute left-0 top-0 h-full w-[80%] max-w-sm bg-white p-6 shadow-xl">
-            <div className="mb-8 flex items-center justify-between">
-              <Link
-                href="/"
-                className="text-xl font-bold"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                SNEAK<span className="italic text-lime-400">ify</span>
-              </Link>
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <X className="h-6 w-6" />
-              </Button>
-            </div>
-            <div className="flex flex-col gap-5">
+          <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white p-6 shadow-xl">
+            <div className="flex flex-col gap-5 mt-10">
               {navItems.map((item) => {
                 const active = isActive(item);
                 return (
