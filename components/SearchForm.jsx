@@ -6,8 +6,10 @@ import { useRouter } from "next/router";
 export default function SearchForm() {
   const router = useRouter();
   const [search, setSearch] = useState(router.query.search || "");
+  function handleSerach(e) {
+    e.preventDefault();
+  }
 
- 
   return (
     <form onSubmit={handleSerach} className="flex">
       <Input
