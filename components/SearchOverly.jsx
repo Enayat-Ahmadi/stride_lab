@@ -8,8 +8,11 @@ export default function SearchOverly({ products, onclose }) {
   const [search, setSearch] = useState(router.query.search || "");
   const query = search.toLocaleLowerCase().trim();
   const result = query
-    ? products.filter((product) =>
-        product.name.toLocaleLowerCase().includes(query),
+    ? products.filter(
+        (product) =>
+          product.name.toLocaleLowerCase().includes(query) ||
+          product.brand?.toLowerCase().includes(query) ||
+          product.category?.toLowerCase().includes(query),
       )
     : [];
   function handleSerach(e) {
