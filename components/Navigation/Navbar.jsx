@@ -79,19 +79,18 @@ export default function Navbar({ products }) {
 
           <div className="flex gap-6">
             <Search onClick={() => setOpen(true)} />
-            {/* Search form */}
             {open && (
               <div className="fixed inset-0 z-50 bg-white p-6">
                 <Button
                   variant="ghost"
                   onClick={() => setOpen(false)}
-                  className="absolute right-19 z-30"
+                  className="absolute right-19"
                 >
                   Cancel
                 </Button>
                 <SearchOverly
                   products={products}
-                  onclose={() => setOpen(false)}
+                  onClose={() => setOpen(false)}
                 />
               </div>
             )}
