@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ShoppingCart, Heart, Menu, X } from "lucide-react";
+import { ShoppingCart, Heart, Menu, X, Search } from "lucide-react";
 import { useRouter } from "next/router";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
@@ -15,6 +15,7 @@ const navItems = [
   { label: "Kids", href: "/products?gender=kids", gender: "kids" },
 ];
 export default function Navbar({ products }) {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const { pathname, query } = router;
   const { wishlist } = useWishlist();
@@ -77,8 +78,20 @@ export default function Navbar({ products }) {
           </div>
 
           <div className="flex gap-6">
+            <Search onClick={() => setOpen(true)} />
             {/* Search form */}
-            <SearchOverly products={products} />
+            {open && (
+              <div className="fixed inset-0 z-50 bg-white p-6">
+                <Button
+                  variant="ghost"
+                  onClick={() => setOpen(false)}
+                  className="absolute right-19 z-30"
+                >
+                  Cancel
+                </Button>
+                <SearchOverly products={products} />
+              </div>
+            )}
             <div className="relative">
               <Link href="/wishlist">
                 <Heart className="w-7 h-7" />
