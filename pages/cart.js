@@ -16,6 +16,7 @@ export default function Cart({ products }) {
         return {
           ...product,
           quantity: item.quantity,
+          size: item.size,
         };
       })
       .filter(Boolean) || [];

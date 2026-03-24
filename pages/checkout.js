@@ -19,9 +19,11 @@ export default function Checkout({ products }) {
       return {
         ...product,
         quantity: item.quantity,
+        size: item.size,
       };
     })
     .filter(Boolean);
+  console.log(cartProducts);
 
   async function handleOrder(e) {
     e.preventDefault();
@@ -42,6 +44,7 @@ export default function Checkout({ products }) {
           productId: product._id,
           name: product.name,
           price: Number(product.price),
+          size: Number(product.size),
           quantity: Number(product.quantity),
         })),
         totalAmount: cartProducts.reduce(

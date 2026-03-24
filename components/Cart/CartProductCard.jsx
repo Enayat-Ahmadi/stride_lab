@@ -25,6 +25,7 @@ export default function CartProductCard({
           <h2 className="text-lg font-semibold">{product.name}</h2>
           <p className="text-muted-foreground">{product.brand}</p>
           <p className="text-sm">Price: € {product.price}</p>
+          <p className="text-sm">Size: {product.size}</p>
         </div>
 
         <div className="mt-3 flex items-center gap-3 rounded-full border w-fit px-4 py-1">
