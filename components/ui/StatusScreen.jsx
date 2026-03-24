@@ -35,13 +35,13 @@ export default function StatusScreen({
             )}
 
             {isError && <span className="text-4xl">!</span>}
-            {isEmpty && <span className="text-4xl">○</span>}
+            {isEmpty && (
+              <span className="font-semibold">
+                Sneak<span className="italic text-lime-400">ify</span>
+              </span>
+            )}
           </div>
         </div>
-
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-black/50">
-          Sneakify
-        </p>
 
         <h1 className="max-w-2xl text-4xl font-black uppercase tracking-tight sm:text-5xl">
           {title ||
