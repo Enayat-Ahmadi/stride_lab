@@ -2,6 +2,7 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Search, X } from "lucide-react";
+import EmptyState from "./ui/EmpatyState";
 
 export default function SearchOverly({ products, onClose }) {
   const router = useRouter();
@@ -63,6 +64,14 @@ export default function SearchOverly({ products, onClose }) {
           <X />
         </button>
       </div>
+      {query && result?.length === 0 && (
+        <EmptyState
+          title="No results found"
+          message="Try another keyword or filter."
+          actionLabel="Back to shop"
+          actionHref="/products"
+        />
+      )}
       <div className="mt-4 space-y-2">
         {query &&
           result.slice(0, 5).map((product) => (
