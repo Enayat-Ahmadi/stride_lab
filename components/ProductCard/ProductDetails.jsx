@@ -9,17 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
+import SuccessMessage from "../ui/SuccessMessage";
 
 export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
   const { addToCart, success } = useCart();
   return (
     <Card className="mx-auto max-w-5xl overflow-hidden">
-      {success && (
-        <div className="fixed top-5 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
-          <span>Product added to shopping cart!</span>
-        </div>
-      )}
+      {success && <SuccessMessage message="Product added to shopping cart!" />}
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
         <div className="relative aspect-square w-full">
           <Image

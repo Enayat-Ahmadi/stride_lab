@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import { Heart } from "lucide-react";
+import SuccessMessage from "../ui/SuccessMessage";
 
 import {
   Card,
@@ -20,11 +21,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
-      {success && (
-        <div className="fixed top-12 right-5 z-50 flex items-center gap-2 rounded-xl bg-green-600 px-4 py-3 text-white shadow-lg">
-          <span>Product added to shopping cart!</span>
-        </div>
-      )}
+      {success && <SuccessMessage message="Product added to shopping cart!" />}
       <Image
         src={product.images?.[0]}
         alt={product.name}
