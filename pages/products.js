@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import ProductsList from "@/components/ProductCard/ProductsList";
 import { useMemo } from "react";
 import { useRouter } from "next/router";
+import EmptyState from "@/components/ui/EmpatyState";
 
 export default function Products({ products }) {
   const router = useRouter();
@@ -26,6 +27,14 @@ export default function Products({ products }) {
         product.name.toLowerCase().includes(query) ||
         product.brand?.toLowerCase().includes(query) ||
         product.category.toLowerCase().includes(query),
+    );
+  }
+  if (!filteredProducts || filteredProducts.length === 0) {
+    return (
+      <EmptyState
+        title="No sneakers found"
+        message="Try another category, search term, or check back for new arrivals."
+      />
     );
   }
   return (
