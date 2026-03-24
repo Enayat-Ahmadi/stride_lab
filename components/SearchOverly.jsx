@@ -36,7 +36,7 @@ export default function SearchOverly({ products, onClose }) {
     setSearch("");
   }
   return (
-    <div className="w-full min-h-screen">
+    <div className="max-w-2xl min-h-screen mx-auto">
       <div className="relative max-w-2xl mx-auto">
         <form onSubmit={handleSerach} className="relative flex w-full">
           <Input
