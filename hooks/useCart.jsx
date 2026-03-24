@@ -5,7 +5,7 @@ export default function useCart() {
   const [productCart, setProductCart] = useLocalStorage("cart", []);
   const [success, setSuccess] = useState(false);
 
-  function addToCart(productId) {
+  function addToCart(productId, productSize) {
     const isExist = productCart.find((item) => item.id === productId);
     if (isExist) {
       setProductCart(
@@ -16,7 +16,10 @@ export default function useCart() {
         ),
       );
     } else {
-      setProductCart([...productCart, { id: productId, quantity: 1 }]);
+      setProductCart([
+        ...productCart,
+        { id: productId, quantity: 1, size: productSize },
+      ]);
     }
     setSuccess(true);
     setTimeout(() => {
