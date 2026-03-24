@@ -4,7 +4,6 @@ import ProductDetails from "@/components/ProductCard/ProductDetails";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ErrorScreen from "@/components/ui/ErrorScreen";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Details() {
   const router = useRouter();
@@ -14,7 +13,7 @@ export default function Details() {
     data: product,
     error,
     isLoading,
-  } = useSWR(id ? `/api/products/${id}` : null, fetcher);
+  } = useSWR(id ? `/api/products/${id}` : null);
   if (isLoading) {
     return <LoadingScreen />;
   }

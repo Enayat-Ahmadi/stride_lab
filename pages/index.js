@@ -1,5 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import ProductsList from "@/components/ProductCard/ProductsList";
 import HeroSection from "@/components/HeroSection";
 
 const geistSans = Geist({
@@ -12,10 +11,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home({ products, error, isLoading }) {
-  if (isLoading) return <h3>isLoading...</h3>;
-  if (error) return <h3>error</h3>;
-
+export default function Home() {
   return (
     <div
       className={`${geistSans.className} ${geistMono.className}min-h-screen w-full flex flex-col items-center justify-center font-sans p-5`}
