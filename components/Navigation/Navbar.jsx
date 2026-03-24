@@ -119,7 +119,7 @@ export default function Navbar({ products }) {
             onClick={() => setMobileMenuOpen(false)}
           />
           <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-white p-6 shadow-xl">
-            <div className="flex justify-center items-end flex-col gap-5 mt-10 mr-2">
+            <div className="flex items-end flex-col gap-5 mt-10 mr-2">
               {navItems.map((item) => {
                 const active = isActive(item);
                 return (
