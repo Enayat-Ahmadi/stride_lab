@@ -2,7 +2,9 @@
   "name": "sneakershop",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "seed": "node db/seed.js",
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",

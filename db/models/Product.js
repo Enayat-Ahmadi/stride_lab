@@ -8,6 +8,7 @@ const ProductSchema = new Schema(
     brand: { type: String, required: true },
     stock: { type: Number, default: 0 },
     category: { type: String },
+    gender: { type: String, required: true },
     description: { type: String, required: true },
     sizes: [Number],
     images: [String],
