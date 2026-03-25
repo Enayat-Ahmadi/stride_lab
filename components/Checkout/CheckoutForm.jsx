@@ -34,6 +34,7 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
               id="fullname"
               name="fullname"
               placeholder="John Doe"
+              autoComplete="name"
               required
             />
           </Field>
@@ -43,16 +44,18 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
               type="email"
               id="email"
               name="email"
-              placeholder="email@email.com"
+              placeholder="johnDoe@email.com"
+              autoComplete="email"
               required
             />
           </Field>
           <Field className="space-y-2">
             <Label htmlFor="phone">Phone</Label>
             <Input
-              type="phone"
+              type="tel"
               name="phone"
               placeholder="+49 123 456789"
+              autoComplete="tel"
               required
             />
           </Field>
@@ -71,6 +74,7 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
               name="address"
               id="address"
               placeholder="Street name and house number"
+              autoComplete="street-address"
               required
             />
           </Field>
@@ -82,16 +86,19 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
                 name="city"
                 id="city"
                 placeholder="Berlin"
+                autoComplete="adress-level2"
                 required
               />
             </Field>
             <Field className="space-y-2">
               <Label htmlFor="postalCode">Postal Code</Label>
               <Input
-                type="number"
+                type="text"
                 name="postalCode"
                 id="postalCode"
                 placeholder="10233"
+                autoComplete="postal-code"
+                pattern="[0-9]{5}"
                 required
               />
             </Field>
@@ -104,7 +111,11 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
           <CardTitle>Payment Method</CardTitle>
         </CardHeader>
         <CardContent>
-          <RadioGroup className="grid gap-4 grid-cols-2">
+          <RadioGroup
+            name="paymentMethod"
+            defaultValue="card"
+            className="grid gap-4 grid-cols-2"
+          >
             <div className="flex items-center gap-3 rounded-xl border p-4">
               <RadioGroupItem value="card" id="card" />
               <Label htmlFor="card" className="cursor-pointer">
@@ -122,8 +133,8 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
       </Card>
       <Button
         type="submit"
-        className="w-full h-12 rounded-full font-semibold btn-hover"
         size="lg"
+        className="w-full h-12 rounded-full font-semibold btn-hover"
         disabled={
           formState === "loading " ||
           formState === "success" ||
