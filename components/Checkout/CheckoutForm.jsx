@@ -86,7 +86,7 @@ export default function CheckoutForm({ onSubmit, cartProducts }) {
                 name="city"
                 id="city"
                 placeholder="Berlin"
-                autoComplete="adress-level2"
+                autoComplete="address-level2"
                 required
               />
             </Field>
