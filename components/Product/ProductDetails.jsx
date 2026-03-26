@@ -37,7 +37,7 @@ export default function ProductDetails({ product }) {
         <div className="space-y-4">
           <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted ">
             <Image
-              src={selectedImage}
+              src={selectedImage || "/hero.jpg"}
               alt={product.name}
               fill
               className="object-cover card-hover"

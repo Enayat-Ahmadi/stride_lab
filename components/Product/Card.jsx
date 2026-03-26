@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
     <Card className="relative mx-auto w-full max-w-sm pt-0 card-hover">
       {success && <SuccessMessage message="Product added to shopping cart!" />}
       <Image
-        src={product.images?.[0]}
+        src={product.images?.[0] || "/hero.jpg"}
         alt={product.name}
         width={800}
         height={450}
