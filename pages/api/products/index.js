@@ -12,6 +12,17 @@ const handler = async (req, res) => {
       res.status(404).json(error.message);
       return;
     }
+  } else if (req.method === "POST") {
+    try {
+      const newProduct = req.body;
+      const product = await Product.create(newProduct);
+      res.status(201).json({ status: "Product created successfully", product });
+      return;
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ status: error.message });
+      return;
+    }
   }
   res.status(405).json({ status: "Method not allowed" });
   return;
