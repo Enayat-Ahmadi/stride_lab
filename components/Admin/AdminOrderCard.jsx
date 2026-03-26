@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function AdminOrderCard({ order }) {
   return (
-    <Link href={`/admin/orders/${order._id}`}>
+    <Link href={`/admin/orders/`}>
       <Card className="cursor-pointer rounded-2xl transition hover:shadow-md hover:scale-[1.01]">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center justify-between">
