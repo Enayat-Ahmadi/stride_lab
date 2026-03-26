@@ -49,7 +49,7 @@ export default function AdminProductCard({ product, onDelete }) {
           </div>
 
           <div className="flex gap-2">
-            <Link href={`/admin/products`} className="flex-1">
+            <Link href={`/admin/products/${product._id}`} className="flex-1">
               <Button variant="outline" className="w-full rounded-full">
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
