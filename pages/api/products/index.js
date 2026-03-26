@@ -5,7 +5,7 @@ const handler = async (req, res) => {
   await dbConnect();
   if (req.method === "GET") {
     try {
-      const products = await Product.find();
+      const products = await Product.find().sort({ createdAt: -1 });
       res.status(200).json(products);
       return;
     } catch (error) {
