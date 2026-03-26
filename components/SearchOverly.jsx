@@ -47,7 +47,7 @@ export default function SearchOverly({ products, onClose }) {
             placeholder="Search product..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full h-12 rounded-full border px-4 py-3 text-lg text-black pl-9 mt-3 placeholder:text-primary"
+            className="w-full h-12 rounded-full border bg-card/60 px-4 py-3 text-lg text-black pl-9 mt-3 placeholder:text-primary"
           />
           <button
             type="submit"
