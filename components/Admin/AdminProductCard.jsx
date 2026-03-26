@@ -41,7 +41,7 @@ export default function AdminProductCard({ product, onDelete }) {
               <p className="text-sm text-muted-foreground">
                 {product.category}
               </p>
-              <p className="text-sm font-medium">${product.price}</p>
+              <p className="text-sm font-medium">€ {product.price}</p>
               <p className="text-sm text-muted-foreground">
                 Stock: {product.stock}
               </p>
