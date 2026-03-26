@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import ProductForm from "@/components/Admin/ProductForm";
+import ErrorScreen from "@/components/ui/ErrorScreen";
+import LoadingScreen from "@/components/ui/LoadingScreen";
 
 export default function AdminProductDetailsPage() {
   const router = useRouter();
@@ -11,6 +13,8 @@ export default function AdminProductDetailsPage() {
     isLoading,
     mutate,
   } = useSWR(`/api/products/${id}`);
+  if (error) return <ErrorScreen />;
+  if (isLoading) return <LoadingScreen />;
 
   async function handleUpdate(productData) {
     const response = await fetch(`/api/products/${id}`, {
