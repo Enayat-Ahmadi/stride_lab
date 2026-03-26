@@ -38,11 +38,11 @@ export default function AdminProductPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border p-4">
+        <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Total Products</p>
           <p className="text-2xl font-bold">{products.length}</p>
         </div>
-        <div className="rounded-2xl border p-4">
+        <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Low Stock</p>
           <p className="text-2xl font-bold">
             {
@@ -52,7 +52,7 @@ export default function AdminProductPage() {
             }
           </p>
         </div>
-        <div className="rounded-2xl border p-4">
+        <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Out of Stock</p>
           <p className="text-2xl font-bold">
             {products?.filter((product) => product.stock === 0).length}

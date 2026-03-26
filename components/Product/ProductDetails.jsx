@@ -35,15 +35,15 @@ export default function ProductDetails({ product }) {
       {success && <SuccessMessage message="Product added to shopping cart!" />}
       <CardContent className="grid md:grid-cols-2 gap-8 p-6">
         <div className="space-y-4">
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted">
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-muted ">
             <Image
               src={selectedImage}
               alt={product.name}
               fill
-              className="object-cover"
+              className="object-cover card-hover"
             />
           </div>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-3 ">
             {product.images?.map((image, index) => (
               <button
                 key={index}
@@ -56,7 +56,7 @@ export default function ProductDetails({ product }) {
                   src={image}
                   alt={`${product.name} ${index + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover card-hover"
                 />
               </button>
             ))}
@@ -104,7 +104,7 @@ export default function ProductDetails({ product }) {
                     type="button"
                     variant={selectedSize === size ? "default" : "outline"}
                     onClick={() => setSelectedSize(size)}
-                    className="h-12"
+                    className="h-12 card-hover"
                   >
                     {size}
                   </Button>
@@ -118,7 +118,7 @@ export default function ProductDetails({ product }) {
               <Button
                 size="lg"
                 onClick={handleAddToCart}
-                className="h-12 rounded-full btn-hover font-semibold"
+                className="h-12 rounded-full btn-hover font-semibold "
               >
                 Add to Cart
               </Button>

@@ -143,6 +143,9 @@ body {
 .btn-hover {
   @apply hover:bg-neutral-800 hover:scale-[1.02] transition duration-300 cursor-pointer;
 }
+.card-hover {
+  @apply hover:shadow-md hover:scale-[1.01] transition cursor-pointer;
+}
 @keyframes loadingBar {
   0% {
     transform: translateX(-120%);
