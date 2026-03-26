@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ProductForm from "@/components/admin/ProductForm";
+import ProductForm from "@/components/Admin/ProductForm";
+import { mutate } from "swr";
 
 export default function CreateProductPage() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function CreateProductPage() {
     if (!response.ok) {
       throw new Error(data.message || "Failed to create product");
     }
+    mutate("/api/products")
     router.push("/admin/products");
   }
   return (
