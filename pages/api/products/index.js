@@ -9,7 +9,7 @@ const handler = async (req, res) => {
       res.status(200).json(products);
       return;
     } catch (error) {
-      res.status(404).json(error.message);
+      res.status(500).json(error.message);
       return;
     }
   } else if (req.method === "POST") {

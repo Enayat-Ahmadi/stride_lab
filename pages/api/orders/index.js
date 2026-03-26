@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       res.status(200).json(orders);
       return;
     } catch (error) {
-      res.status(400).json({ status: error.message });
+      res.status(500).json({ status: error.message });
       return;
     }
   } else if (req.method === "POST") {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       return;
     } catch (error) {
       console.error(error);
-      res.status(400).json({ status: error.message });
+      res.status(500).json({ status: error.message });
       return;
     }
   }
