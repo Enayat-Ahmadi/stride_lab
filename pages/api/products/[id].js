@@ -21,6 +21,28 @@ const handler = async (req, res) => {
       res.status(400).json({ error: "Product not found" });
       return;
     }
+  } else if (req.method === "PUT") {
+    const newProduct = req.body;
+    try {
+      const updateProduct = await Product.findByIdAndUpdate(id, newProduct, {
+        new: true,
+        runValidators: true,
+      });
+      if (!updateProduct) {
+        return res.status(404).json({
+          message: "Product not found",
+        });
+      }
+      res.status(200).json({
+        message: "Product updated successfully",
+        product: updateProduct,
+      });
+      return;
+    } catch (error) {
+      console.error("Put error: ", error);
+      res.status(500).json({ message: "Failed to update product" });
+      return;
+    }
   }
   res.status(405).json({ status: "Method not allowed" });
   return;
