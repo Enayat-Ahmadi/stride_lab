@@ -11,7 +11,7 @@ export default function CartProductCard({
   const total = product.price * product.quantity;
 
   return (
-    <div className="flex gap-6 rounded-2xl border p-5 shadow-sm">
+    <div className="flex gap-6 rounded-2xl border p-5 shadow-sm card-hover">
       <div className="relative h-45 w-40 shrink-0 overflow-hidden rounded-xl">
         <Image
           src={product.images?.[0]}
