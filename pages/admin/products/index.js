@@ -19,6 +19,11 @@ export default function AdminProductPage() {
     }
   }
   const products = Array.isArray(data) ? data : [];
+
+  const lowStock = products?.filter(
+    (product) => product?.stock > 0 && product.stock <= 5,
+  ).length;
+  const outOfStock = products?.filter((product) => product.stock === 0).length;
   return (
     <main className="max-w-6xl min-h-screen flex flex-col mx-auto gap-3 bg-background px-4 py-8 md:px-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -44,22 +49,22 @@ export default function AdminProductPage() {
         </div>
         <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Low Stock</p>
-          <p className="text-2xl font-bold">
-            {
-              products?.filter(
-                (product) => product?.stock > 0 && product.stock <= 5,
-              ).length
-            }
-          </p>
+          <p className="text-2xl font-bold">{lowStock}</p>
         </div>
         <div className="rounded-2xl border p-4 card-hover">
           <p className="text-sm text-muted-foreground">Out of Stock</p>
-          <p className="text-2xl font-bold">
-            {products?.filter((product) => product.stock === 0).length}
-          </p>
+          <p className="text-2xl font-bold">{outOfStock}</p>
         </div>
       </div>
 
+      <div className="hidden rounded-2xl border bg-muted/30 px-4 py-3 text-sm font-medium text-muted-foreground md:grid md:grid-cols-[1.8fr_1fr_1fr_0.8fr_0.8fr_1fr]">
+        <div>Product</div>
+        <div>Brand</div>
+        <div>Category</div>
+        <div>Price</div>
+        <div>Stock</div>
+        <div>Actions</div>
+      </div>
       <AdminProductsList products={products} onDelete={handleDelete} />
     </main>
   );
