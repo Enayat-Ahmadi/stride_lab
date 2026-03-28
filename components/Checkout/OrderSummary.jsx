@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { formatCurrency } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 
@@ -33,7 +33,7 @@ export default function OrderSummary({ cartProducts }) {
                   </p>
                 </div>
                 <p className="font-medium">
-                  € {(product.price * product.quantity).toFixed(2)}
+                  {formatCurrency(product.price * product.quantity)}
                 </p>
               </div>
             ))
@@ -45,7 +45,7 @@ export default function OrderSummary({ cartProducts }) {
         <div className="space-y-2 text-sm">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground">Subtotal</span>
-            <span>€ {subtotal.toFixed(2)}</span>
+            <span>{formatCurrency(subtotal)}</span>
           </div>
         </div>
 
@@ -53,7 +53,7 @@ export default function OrderSummary({ cartProducts }) {
 
         <div className="flex items-center justify-between text-base font-semibold">
           <span>Total</span>
-          <span>€ {subtotal.toFixed(2)}</span>
+          <span>{formatCurrency(subtotal)}</span>
         </div>
       </CardContent>
     </Card>
