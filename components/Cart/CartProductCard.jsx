@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { formatCurrency } from "@/lib/utils";
 
 export default function CartProductCard({
   product,
@@ -14,7 +15,7 @@ export default function CartProductCard({
     <div className="flex gap-6 rounded-2xl border p-5 shadow-sm card-hover">
       <div className="relative h-45 w-40 shrink-0 overflow-hidden rounded-xl">
         <Image
-          src={product.images?.[0]}
+          src={product.images?.[0] || "/hero.jpg"}
           alt={product.name}
           fill
           className="object-cover"
@@ -24,7 +25,7 @@ export default function CartProductCard({
         <div className="space-y-1">
           <h2 className="text-lg font-semibold">{product.name}</h2>
           <p className="text-muted-foreground">{product.brand}</p>
-          <p className="text-sm">Price: € {product.price}</p>
+          <p className="text-sm">Price: {formatCurrency(product.price)}</p>
           <p className="text-sm">Size: {product.size}</p>
         </div>
 
@@ -46,7 +47,7 @@ export default function CartProductCard({
           </Button>
         </div>
         <div className="mt-4 flex items-center justify-between">
-          <p className="font-semibold">Total € {total.toFixed(2)}</p>
+          <p className="font-semibold">Total {formatCurrency(total)}</p>
 
           <Button
             className="text-muted-foreground hover:text-red-500"

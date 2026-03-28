@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import CartProductCard from "@/components/Cart/CartProductCard";
 import Link from "next/link";
 import EmptyState from "@/components/ui/EmpatyState";
+import { formatCurrency } from "@/lib/utils";
 
 export default function Cart({ products }) {
   const { productCart, removeFromCart, increaseQuantity, decreaseQuantity } =
@@ -25,7 +26,10 @@ export default function Cart({ products }) {
     (sum, product) => sum + product.price * product.quantity,
     0,
   );
-
+  const totalItems = cartProducts.reduce(
+    (acc, product) => acc + product.quantity,
+    0,
+  );
   if (cartProducts.length === 0) {
     return (
       <EmptyState
@@ -37,11 +41,14 @@ export default function Cart({ products }) {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-7xl px-4 py-8 md:px-6">
-      <div className="mb-8 space-y-1 text-center">
-        <h1 className="text-3xl font-bold tracking-tight">Bag</h1>
-        <p className="text-muted-foreground">
-          {cartProducts.length} item{cartProducts.length > 1 ? "s" : ""}
-        </p>
+      <div className="mb-8 space-y-1 text-center border rounded-2xl flex items-center justify-center gap-5 bg-card p-4">
+        <h1 className="text-3xl font-bold tracking-tight">
+          Your shopping Cart
+          <span className="text-muted-foreground">
+            {" "}
+            {totalItems} item{totalItems > 1 ? "s" : ""}
+          </span>
+        </h1>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1.6fr_0.8fr]">
@@ -63,7 +70,7 @@ export default function Cart({ products }) {
           <div className="space-y-4 text-sm font-semibold">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Subtotal</span>
-              <span>{totalPrice.toFixed(2)} €</span>
+              <span>{formatCurrency(totalPrice)}</span>
             </div>
 
             <div className="flex justify-between">
@@ -79,7 +86,7 @@ export default function Cart({ products }) {
             <div className="border-t pt-4">
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total</span>
-                <span>{totalPrice.toFixed(2)} €</span>
+                <span>{formatCurrency(totalPrice)}</span>
               </div>
             </div>
           </div>
