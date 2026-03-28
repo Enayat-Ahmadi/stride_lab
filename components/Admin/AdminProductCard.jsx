@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import DeleteConfirmModal from "../ui/DeleteConfirmModal";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function AdminProductCard({ product, onDelete }) {
   const [open, setOpen] = useState(false);
@@ -43,8 +44,14 @@ export default function AdminProductCard({ product, onDelete }) {
                 {product.category}
               </p>
               <p className="text-sm font-medium">€ {product.price}</p>
-              <p className="text-sm text-muted-foreground">
-                Stock: {product.stock}
+              <p
+                className={cn(
+                  product.stock < 5 && "text-amber-300",
+                  product.stock === 0 && "text-red-700",
+                  product.stock > 5 && "text-muted-foreground",
+                )}
+              >
+                Stock: {product.stock > 0 ? product.stock : "Out of stock"}
               </p>
             </div>
           </div>
@@ -76,7 +83,6 @@ export default function AdminProductCard({ product, onDelete }) {
         />
         {/* DESkTOP */}
         <div className="hidden items-center gap-4 md:grid md:grid-cols-[1.5fr_1fr_1fr_0.8fr_0.8fr_0.8fr]">
-          
           <div className="flex items-center gap-4">
             <div className="relative h-16 w-16 overflow-hidden rounded-xl bg-muted">
               <Image
@@ -101,7 +107,16 @@ export default function AdminProductCard({ product, onDelete }) {
 
           <div className="text-sm font-medium">${product.price}</div>
 
-          <div className="text-sm">{product.stock}</div>
+          <div
+            className={cn(
+              "text-sm",
+              product.stock < 5 && "text-amber-600",
+              product.stock === 0 && "text-red-600",
+              product.stock > 5 && "text-muted-foreground",
+            )}
+          >
+            Stock: {product.stock > 0 ? product.stock : "Out of stock"}
+          </div>
 
           <div className="flex justify-end gap-2">
             <Link href={`/admin/products/${product._id}`}>

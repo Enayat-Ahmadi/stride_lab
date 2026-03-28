@@ -1,17 +1,13 @@
 import Image from "next/image";
 import { Heart } from "lucide-react";
-import {
-  CardContent,
-  Card,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
+import { CardContent, Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import useWishlist from "@/hooks/useWishlist";
 import useCart from "@/hooks/useCart";
 import SuccessMessage from "../ui/SuccessMessage";
 import { useState } from "react";
+import { cn, formatCurrency } from "@/lib/utils";
 
 export default function ProductDetails({ product }) {
   const { toggleWishlist, isWishlisted } = useWishlist();
@@ -29,7 +25,6 @@ export default function ProductDetails({ product }) {
     addToCart(product._id, selectedSize);
     setSizeAlert(false);
   }
-
   return (
     <Card className="mx-auto max-w-6xl overflow-hidden">
       {success && <SuccessMessage message="Product added to shopping cart!" />}
@@ -69,7 +64,9 @@ export default function ProductDetails({ product }) {
               <div className="space-y-2">
                 <Badge variant="secondary">{product.brand}</Badge>
                 <h1 className="text-3xl font-bold">{product.name}</h1>
-                <p className="text-2xl font-semibold">{product.price} €</p>
+                <p className="text-2xl font-semibold">
+                  {formatCurrency(product.price)}
+                </p>
               </div>
 
               <Button
@@ -88,6 +85,15 @@ export default function ProductDetails({ product }) {
 
             <p className="text-sm leading-6 text-muted-foreground">
               {product.description}
+            </p>
+            <p
+              className={cn(
+                product.stock < 5 && "text-amber-600",
+                product.stock === 0 && "text-red-600",
+                product.stock > 5 && "text-muted-foreground",
+              )}
+            >
+              Stock: {product.stock > 0 ? product.stock : "Out of stock"}
             </p>
           </div>
 
@@ -112,13 +118,14 @@ export default function ProductDetails({ product }) {
               </div>
             </div>
             {!selectedSize && sizeAlert && (
-              <p className="text-red-500 text-lg">Please select a size</p>
+              <p className="text-red-500 text-md">Please select a size</p>
             )}
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button
                 size="lg"
                 onClick={handleAddToCart}
-                className="h-12 rounded-full btn-hover font-semibold "
+                disabled={product.stock === 0}
+                className="h-12 rounded-full btn-hover font-semibold"
               >
                 Add to Cart
               </Button>
