@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import DeleteConfirmModal from "../ui/DeleteConfirmModal";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 export default function AdminProductCard({ product, onDelete }) {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,9 @@ export default function AdminProductCard({ product, onDelete }) {
               <p className="text-sm text-muted-foreground">
                 {product.category}
               </p>
-              <p className="text-sm font-medium">€ {product.price}</p>
+              <p className="text-sm font-medium">
+                {formatCurrency(product.price)}
+              </p>
               <p
                 className={cn(
                   product.stock < 5 && "text-amber-300",
@@ -105,7 +108,9 @@ export default function AdminProductCard({ product, onDelete }) {
 
           <div className="text-sm capitalize">{product.category}</div>
 
-          <div className="text-sm font-medium">${product.price}</div>
+          <div className="text-sm font-medium">
+            {formatCurrency(product.price)}
+          </div>
 
           <div
             className={cn(
