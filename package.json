@@ -18,6 +18,8 @@
     "lucide-react": "^0.577.0",
     "mongoose": "^9.2.4",
     "next": "16.1.6",
+    "next-auth": "^4.24.14",
+    "oauth": "^0.10.2",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
