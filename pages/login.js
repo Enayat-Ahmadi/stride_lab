@@ -43,6 +43,13 @@ export default function LoginPage() {
           <Github className="w-5 h-5" />
           Continue with GitHub
         </button>
+        <button
+          onClick={() => signIn("google")}
+          className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white py-3 hover:opacity-90 transition mt-3"
+        >
+          <Github className="w-5 h-5" />
+          Continue with Google
+        </button>
       </div>
     </main>
   );
