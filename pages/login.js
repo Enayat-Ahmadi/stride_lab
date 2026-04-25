@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Github } from "lucide-react";
+import { Github, Chrome } from "lucide-react";
 import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
@@ -35,20 +36,19 @@ export default function LoginPage() {
         <p className="text-neutral-600 mb-6">
           Sign in to access the admin area
         </p>
-
-        <button
-          onClick={() => signIn("github")}
-          className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white py-3 hover:opacity-90 transition"
-        >
-          <Github className="w-5 h-5" />
-          Continue with GitHub
-        </button>
         <button
           onClick={() => signIn("google")}
           className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white py-3 hover:opacity-90 transition mt-3"
         >
-          <Github className="w-5 h-5" />
+          <FcGoogle size={20} />
           Continue with Google
+        </button>
+        <button
+          onClick={() => signIn("github")}
+          className="w-full flex items-center justify-center gap-3 rounded-xl bg-black text-white py-3 hover:opacity-90 transition mt-3"
+        >
+          <Github className="w-5 h-5" />
+          Continue with GitHub
         </button>
       </div>
     </main>
