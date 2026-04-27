@@ -25,10 +25,11 @@ export const authOptions = {
   },
   callbacks: {
     async jwt({ token, account, profile }) {
+      const adminEmails = (process.env.ADMIN_EMAILS || "").split(",");
       if (account && profile) {
         token.id = profile.id?.toString();
-        token.login = profile.login;
-        token.role = profile.login === "Enayat-Ahmadi" ? "admin" : "user";
+        token.role = adminEmails.includes(profile.email) ? "admin" : "user";
+        token.login = profile.login || null;
       }
       return token;
     },
