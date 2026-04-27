@@ -1,8 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Github, Chrome } from "lucide-react";
+import { Github} from "lucide-react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-import { isAdmin } from "@/lib/isAdmin";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
